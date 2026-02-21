@@ -193,4 +193,35 @@
 ::-webkit-scrollbar-track { background: #0A2240; }
 ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
 
+/* ── Radar pulse rings (hero background effect) ──────────── */
+@keyframes radarPulse {
+  0%   { transform: translate(-50%, -50%) scale(0.3); opacity: 0.6; }
+  100% { transform: translate(-50%, -50%) scale(3);   opacity: 0; }
+}
+
+.radar-ring {
+  position: absolute;
+  top: 50%;
+  left: 72%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  animation: radarPulse 6s ease-out infinite;
+  pointer-events: none;
+}
+.radar-ring:nth-child(2) { animation-delay: 2s; }
+.radar-ring:nth-child(3) { animation-delay: 4s; }
+
+/* Subtle static rings behind content */
+.radar-static {
+  position: absolute;
+  top: 50%;
+  left: 72%;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, 0.06);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
 

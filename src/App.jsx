@@ -90,414 +90,87 @@ function Navbar() {
   )
 }
 
-// ─── Hero scenes (SVG backgrounds) ──────────────────────────────────────────
-const scenes = [
-  {
-    label: 'Space · The Final Frontier',
-    bg: ['#02080f', '#050f1e', '#071428'],
-    render: () => (
-      <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        {/* Stars */}
-        {[
-          [8,12],[15,35],[22,8],[30,55],[45,20],[55,40],[62,10],[70,65],[78,30],
-          [85,50],[92,15],[12,70],[25,80],[40,90],[60,75],[75,85],[88,72],[5,50],
-          [35,15],[50,5],[66,45],[80,10],[95,60],[18,45],[48,60],[72,20]
-        ].map(([x,y],i) => (
-          <circle key={i} cx={`${x}%`} cy={`${y}%`} r={i%4===0?1.5:i%3===0?1:0.7}
-            fill="white" fillOpacity={0.4+Math.random()*0.5}
-            style={{animation:`starTwinkle ${2+i%3}s ease-in-out ${i*0.2}s infinite alternate`}} />
-        ))}
-        {/* Large star clusters */}
-        {[[20,25],[60,15],[80,55]].map(([x,y],i)=>(
-          <circle key={`b${i}`} cx={`${x}%`} cy={`${y}%`} r={0.4} fill="white" fillOpacity={0.7} />
-        ))}
-        {/* Planet glow - right side */}
-        <ellipse cx="85%" cy="30%" rx="120" ry="120"
-          fill="url(#planetGlow)" />
-        {/* Planet arc */}
-        <circle cx="88%" cy="22%" r="70" fill="#0d2545" stroke="#1a3a6e" strokeWidth="1" opacity="0.8"/>
-        <circle cx="88%" cy="22%" r="70" fill="url(#planetSurface)" opacity="0.6"/>
-        {/* Planet ring */}
-        <ellipse cx="88%" cy="22%" rx="100" ry="18" fill="none" stroke="#D4AF37" strokeWidth="0.8" opacity="0.25" strokeDasharray="4 3"/>
-        {/* Satellite silhouette */}
-        <g transform="translate(200,320) rotate(-20)" opacity="0.3">
-          <rect x="-3" y="-12" width="6" height="24" fill="#8ab4d4"/>
-          <rect x="-20" y="-3" width="40" height="6" fill="#4a7fa8"/>
-        </g>
-        {/* Milky way band */}
-        <ellipse cx="50%" cy="60%" rx="800" ry="80" fill="white" fillOpacity="0.02"/>
-        <defs>
-          <radialGradient id="planetGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#1a5276" stopOpacity="0.3"/>
-            <stop offset="100%" stopColor="#1a5276" stopOpacity="0"/>
-          </radialGradient>
-          <radialGradient id="planetSurface" cx="40%" cy="35%" r="60%">
-            <stop offset="0%" stopColor="#2471a3" stopOpacity="0.5"/>
-            <stop offset="100%" stopColor="#0a2240" stopOpacity="0.2"/>
-          </radialGradient>
-        </defs>
-      </svg>
-    ),
-  },
-  {
-    label: 'Military Aviation · Precision & Power',
-    bg: ['#071e38', '#0a2a4a', '#0d3360'],
-    render: () => (
-      <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        {/* Night sky gradient */}
-        <defs>
-          <linearGradient id="jetSky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#071e38"/>
-            <stop offset="100%" stopColor="#0f3460"/>
-          </linearGradient>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#jetSky)"/>
-
-        {/* Speed lines */}
-        {[0.15,0.35,0.55,0.72,0.85].map((y,i)=>(
-          <line key={i} x1="-5%" y1={`${y*100}%`} x2="30%" y2={`${y*100+2}%`}
-            stroke="white" strokeWidth="0.5" strokeOpacity="0.06"/>
-        ))}
-
-        {/* Lead fighter — large, center */}
-        <g transform="translate(52%,44%) scale(1.1)" opacity="0.75">
-          {/* Fuselage */}
-          <path d="M0,-6 L80,0 L0,6 L8,0 Z" fill="#b8cfe0"/>
-          {/* Delta wing */}
-          <path d="M10,-5 L-40,-28 L-30,-28 L20,0 L-30,28 L-40,28 Z" fill="#8aabcc"/>
-          {/* Canard */}
-          <path d="M45,-4 L25,-18 L28,-18 L50,0 L28,18 L25,18 Z" fill="#8aabcc" opacity="0.8"/>
-          {/* Engine glow */}
-          <ellipse cx="-2" cy="0" rx="4" ry="3" fill="#D4AF37" opacity="0.5"/>
-          <ellipse cx="-2" cy="0" rx="8" ry="5" fill="#D4AF37" opacity="0.15"/>
-        </g>
-
-        {/* Wingman 1 — upper left, further away */}
-        <g transform="translate(28%,28%) scale(0.55)" opacity="0.45">
-          <path d="M0,-6 L80,0 L0,6 L8,0 Z" fill="#8aabcc"/>
-          <path d="M10,-5 L-40,-28 L-30,-28 L20,0 L-30,28 L-40,28 Z" fill="#6a90b0"/>
-          <path d="M45,-4 L25,-18 L28,-18 L50,0 L28,18 L25,18 Z" fill="#6a90b0"/>
-        </g>
-
-        {/* Wingman 2 — lower left */}
-        <g transform="translate(30%,62%) scale(0.55)" opacity="0.45">
-          <path d="M0,-6 L80,0 L0,6 L8,0 Z" fill="#8aabcc"/>
-          <path d="M10,-5 L-40,-28 L-30,-28 L20,0 L-30,28 L-40,28 Z" fill="#6a90b0"/>
-          <path d="M45,-4 L25,-18 L28,-18 L50,0 L28,18 L25,18 Z" fill="#6a90b0"/>
-        </g>
-
-        {/* Afterburner trails */}
-        {[[52,44],[28,28],[30,62]].map(([x,y],i)=>(
-          <line key={i}
-            x1={`${x-2}%`} y1={`${y+0.5}%`}
-            x2={`${x-12-i*3}%`} y2={`${y+0.5+i*0.5}%`}
-            stroke="#D4AF37" strokeWidth={3-i} strokeOpacity={0.35-i*0.08}
-            style={{filter:'blur(2px)'}}/>
-        ))}
-
-        {/* Stars (faint) */}
-        {[[5,8],[18,20],[35,5],[72,8],[88,18],[95,35],[3,55],[92,62]].map(([x,y],i)=>(
-          <circle key={i} cx={`${x}%`} cy={`${y}%`} r={0.6} fill="white" fillOpacity={0.3}/>
-        ))}
-
-        {/* Horizon glow */}
-        <ellipse cx="50%" cy="100%" rx="80%" ry="40%" fill="#1a5276" fillOpacity="0.12"/>
-      </svg>
-    ),
-  },
-  {
-    label: 'Commercial Aviation · Connecting the World',
-    bg: ['#1a4a7a', '#2471a3', '#1a6fa8'],
-    render: () => (
-      <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-          <linearGradient id="daySky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#0d3b6e"/>
-            <stop offset="60%" stopColor="#1a6fa8"/>
-            <stop offset="100%" stopColor="#2e86c1"/>
-          </linearGradient>
-          <filter id="cloudBlur"><feGaussianBlur stdDeviation="6"/></filter>
-          <filter id="softBlur"><feGaussianBlur stdDeviation="2"/></filter>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#daySky)"/>
-
-        {/* Clouds */}
-        {[
-          {cx:'15%', cy:'25%', rx:90, ry:30, op:0.12},
-          {cx:'70%', cy:'15%', rx:120, ry:35, op:0.1},
-          {cx:'45%', cy:'35%', rx:80, ry:22, op:0.08},
-          {cx:'85%', cy:'55%', rx:100, ry:28, op:0.09},
-          {cx:'10%', cy:'60%', rx:70, ry:20, op:0.07},
-        ].map((c,i)=>(
-          <ellipse key={i} cx={c.cx} cy={c.cy} rx={c.rx} ry={c.ry}
-            fill="white" fillOpacity={c.op} filter="url(#cloudBlur)"/>
-        ))}
-
-        {/* Commercial airliner — main */}
-        <g transform="translate(55%,40%)" opacity="0.8">
-          {/* Fuselage */}
-          <path d="M-5,-5 Q10,-5 90,-3 Q96,-2 96,0 Q96,2 90,3 Q10,5 -5,5 Z" fill="white" fillOpacity="0.9"/>
-          {/* Main wings */}
-          <path d="M20,-4 L-30,-38 L-18,-38 L38,0 L-18,38 L-30,38 Z" fill="white" fillOpacity="0.75"/>
-          {/* Tail fin */}
-          <path d="M-2,-4 L-10,-28 L-6,-28 L4,0 Z" fill="white" fillOpacity="0.7"/>
-          {/* Horizontal tail */}
-          <path d="M-2,-3 L-28,-14 L-22,-14 L4,0 L-22,14 L-28,14 Z" fill="white" fillOpacity="0.65"/>
-          {/* Engines */}
-          <ellipse cx="14" cy="12" rx="10" ry="5" fill="white" fillOpacity="0.55"/>
-          <ellipse cx="14" cy="-12" rx="10" ry="5" fill="white" fillOpacity="0.55"/>
-          {/* Contrail */}
-          <line x1="-5" y1="0" x2="-160" y2="6" stroke="white" strokeWidth="3" strokeOpacity="0.15" filter="url(#softBlur)"/>
-          <line x1="-5" y1="0" x2="-140" y2="-3" stroke="white" strokeWidth="2" strokeOpacity="0.1" filter="url(#softBlur)"/>
-        </g>
-
-        {/* Small prop plane — distant */}
-        <g transform="translate(22%,62%) scale(0.4)" opacity="0.5">
-          <ellipse cx="0" cy="0" rx="35" ry="8" fill="white" fillOpacity="0.8"/>
-          <path d="M-5,-6 L-40,-28 L-30,-28 L10,0 L-30,28 L-40,28 Z" fill="white" fillOpacity="0.6"/>
-          <path d="M20,-4 L10,-15 L14,-15 L25,0 L14,15 L10,15 Z" fill="white" fillOpacity="0.6"/>
-        </g>
-
-        {/* Sun glare */}
-        <circle cx="80%" cy="18%" r="60" fill="#ffffff" fillOpacity="0.04"/>
-        <circle cx="80%" cy="18%" r="30" fill="#ffffff" fillOpacity="0.06"/>
-
-        {/* Horizon */}
-        <ellipse cx="50%" cy="100%" rx="70%" ry="30%" fill="#5dade2" fillOpacity="0.1"/>
-      </svg>
-    ),
-  },
-  {
-    label: 'Pioneering Flight · Where It All Began',
-    bg: ['#1a1a2e', '#2c1654', '#3d1a6e'],
-    render: () => (
-      <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-          <linearGradient id="dawnSky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#0d0d2b"/>
-            <stop offset="45%" stopColor="#1a1a4e"/>
-            <stop offset="75%" stopColor="#6b2fa0"/>
-            <stop offset="90%" stopColor="#c0392b" stopOpacity="0.5"/>
-            <stop offset="100%" stopColor="#e67e22" stopOpacity="0.4"/>
-          </linearGradient>
-          <filter id="glow"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          <filter id="warmGlow"><feGaussianBlur stdDeviation="15"/></filter>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#dawnSky)"/>
-
-        {/* Horizon warm glow */}
-        <ellipse cx="50%" cy="100%" rx="60%" ry="35%" fill="#e67e22" fillOpacity="0.18" filter="url(#warmGlow)"/>
-        <ellipse cx="50%" cy="95%" rx="40%" ry="20%" fill="#D4AF37" fillOpacity="0.1" filter="url(#warmGlow)"/>
-
-        {/* Balloon 1 — large, center-right */}
-        <g transform="translate(62%,38%)" opacity="0.82">
-          {/* Envelope panels */}
-          <ellipse cx="0" cy="-30" rx="38" ry="52" fill="#D4AF37" fillOpacity="0.85"/>
-          <path d="M-20,-30 Q0,-82 20,-30" fill="#b8960f" fillOpacity="0.5"/>
-          <path d="M-38,-30 Q-20,-82 0,-30" fill="#b8960f" fillOpacity="0.3"/>
-          <path d="M0,-30 Q20,-82 38,-30" fill="#b8960f" fillOpacity="0.3"/>
-          {/* Crown */}
-          <ellipse cx="0" cy="-82" rx="10" ry="5" fill="#b8960f" fillOpacity="0.7"/>
-          {/* Ropes */}
-          <line x1="-30" y1="20" x2="-22" y2="42" stroke="#8B7355" strokeWidth="1" strokeOpacity="0.7"/>
-          <line x1="30" y1="20" x2="22" y2="42" stroke="#8B7355" strokeWidth="1" strokeOpacity="0.7"/>
-          <line x1="-10" y1="22" x2="-8" y2="42" stroke="#8B7355" strokeWidth="1" strokeOpacity="0.6"/>
-          <line x1="10" y1="22" x2="8" y2="42" stroke="#8B7355" strokeWidth="1" strokeOpacity="0.6"/>
-          {/* Basket */}
-          <rect x="-22" y="42" width="44" height="22" rx="3" fill="#6b4c2a" fillOpacity="0.8"/>
-          <line x1="-22" y1="52" x2="22" y2="52" stroke="#8B7355" strokeWidth="1" strokeOpacity="0.5"/>
-          {/* Burner glow */}
-          <ellipse cx="0" cy="42" rx="8" ry="4" fill="#e67e22" fillOpacity="0.6" filter="url(#glow)"/>
-        </g>
-
-        {/* Balloon 2 — smaller, left */}
-        <g transform="translate(25%,55%) scale(0.6)" opacity="0.55">
-          <ellipse cx="0" cy="-30" rx="38" ry="52" fill="#0a2240" fillOpacity="0.7"/>
-          <path d="M-20,-30 Q0,-82 20,-30" fill="white" fillOpacity="0.1"/>
-          <path d="M-38,-30 Q-20,-82 0,-30" fill="white" fillOpacity="0.07"/>
-          <line x1="-28" y1="18" x2="-20" y2="40" stroke="#8B7355" strokeWidth="1.5" strokeOpacity="0.6"/>
-          <line x1="28" y1="18" x2="20" y2="40" stroke="#8B7355" strokeWidth="1.5" strokeOpacity="0.6"/>
-          <rect x="-20" y="40" width="40" height="20" rx="3" fill="#6b4c2a" fillOpacity="0.7"/>
-        </g>
-
-        {/* Balloon 3 — tiny, far right */}
-        <g transform="translate(85%,30%) scale(0.38)" opacity="0.35">
-          <ellipse cx="0" cy="-30" rx="38" ry="52" fill="#c0392b" fillOpacity="0.6"/>
-          <line x1="-25" y1="18" x2="-18" y2="38" stroke="#8B7355" strokeWidth="1.5" strokeOpacity="0.5"/>
-          <line x1="25" y1="18" x2="18" y2="38" stroke="#8B7355" strokeWidth="1.5" strokeOpacity="0.5"/>
-          <rect x="-18" y="38" width="36" height="18" rx="3" fill="#6b4c2a" fillOpacity="0.6"/>
-        </g>
-
-        {/* Stars (fading) */}
-        {[[8,10],[20,6],[38,14],[55,4],[70,9],[90,12],[4,30],[15,50]].map(([x,y],i)=>(
-          <circle key={i} cx={`${x}%`} cy={`${y}%`} r={0.8} fill="white" fillOpacity={0.25}/>
-        ))}
-      </svg>
-    ),
-  },
-]
-
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 function Hero() {
-  const sectionRef = useRef(null)
-  const [progress, setProgress] = useState(0)
-
-  useEffect(() => {
-    // Keyframes for star twinkle (injected once)
-    if (!document.getElementById('hero-keyframes')) {
-      const style = document.createElement('style')
-      style.id = 'hero-keyframes'
-      style.textContent = `
-        @keyframes starTwinkle {
-          0%   { opacity: 0.3; }
-          100% { opacity: 0.9; }
-        }
-      `
-      document.head.appendChild(style)
-    }
-
-    const onScroll = () => {
-      const el = sectionRef.current
-      if (!el) return
-      const rect = el.getBoundingClientRect()
-      const totalScroll = el.offsetHeight - window.innerHeight
-      const scrolled = -rect.top
-      const p = Math.max(0, Math.min(1, scrolled / totalScroll))
-      setProgress(p)
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  // Which scene + blend factor
-  const sceneCount = scenes.length
-  const rawIndex  = progress * (sceneCount - 1)
-  const fromIdx   = Math.min(Math.floor(rawIndex), sceneCount - 1)
-  const toIdx     = Math.min(fromIdx + 1, sceneCount - 1)
-  const blend     = rawIndex - fromIdx          // 0..1
-
-  const from = scenes[fromIdx]
-  const to   = scenes[toIdx]
-
-  // Interpolate background colours (simple average at midpoint)
-  const lerp = (a, b, t) => Math.round(parseInt(a.slice(1,3),16)*(1-t) + parseInt(b.slice(1,3),16)*t).toString(16).padStart(2,'0')
-  const lerpHex = (a, b, t) => `#${lerp(a,b,t)}${lerp(a.slice(3,5)||a.slice(1,3),b.slice(3,5)||b.slice(1,3),t)}${lerp(a.slice(5,7)||a.slice(1,3),b.slice(5,7)||b.slice(1,3),t)}`
-
-  const bg0 = lerpHex(from.bg[0], to.bg[0], blend)
-  const bg1 = lerpHex(from.bg[1], to.bg[1], blend)
-
-  // Scene label for the indicator dots
-  const activeScene = blend < 0.5 ? fromIdx : toIdx
-
   return (
-    <section
-      id="hero"
-      ref={sectionRef}
-      style={{ height: '400vh' }}
-      className="relative"
-    >
-      {/* Sticky viewport */}
-      <div className="sticky top-0 h-screen overflow-hidden grain">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden grain">
+      {/* Background - navy gradient simulating sky */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          background: 'linear-gradient(160deg, #061729 0%, #0A2240 40%, #0d3a6e 70%, #1a5276 100%)',
+        }}
+      />
 
-        {/* Animated background colour */}
-        <div
-          className="absolute inset-0 z-0 transition-colors duration-100"
-          style={{ background: `linear-gradient(170deg, ${bg0} 0%, ${bg1} 100%)` }}
-        />
+      {/* Geometric decorative elements */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute top-1/4 right-0 w-[600px] h-[600px] rounded-full opacity-5"
+          style={{ background: 'radial-gradient(circle, #D4AF37 0%, transparent 70%)' }} />
+        <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full opacity-5"
+          style={{ background: 'radial-gradient(circle, #1a5276 0%, transparent 70%)' }} />
 
-        {/* Scene layers — crossfade */}
-        <div className="absolute inset-0 z-1">
-          {scenes.map((scene, i) => {
-            let opacity = 0
-            if (i === fromIdx) opacity = 1 - blend
-            if (i === toIdx)   opacity = blend
-            if (fromIdx === toIdx) opacity = 1
-            return (
-              <div
-                key={i}
-                className="absolute inset-0"
-                style={{ opacity, transition: 'opacity 0.05s linear' }}
-              >
-                {scene.render()}
-              </div>
-            )
-          })}
-        </div>
+        {/* Diagonal lines */}
+        <div className="absolute top-20 right-20 w-px h-64 bg-gold/20 rotate-12" />
+        <div className="absolute top-40 right-32 w-px h-40 bg-gold/10 rotate-12" />
 
-        {/* Content — always visible */}
-        <div className="relative z-10 h-full flex flex-col items-center justify-center max-w-5xl mx-auto px-6 lg:px-10 text-center pt-20">
-          <div className="hero-text-1">
-            <span className="section-label text-gold tracking-[0.4em]">
-              ✦ Petra Air Foundation ✦
-            </span>
-          </div>
+        {/* Horizon line */}
+        <div className="absolute bottom-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
 
-          <h1 className="hero-text-2 font-serif font-black text-white mt-6 leading-[1.05]"
-            style={{ fontSize: 'clamp(2.8rem, 7vw, 6rem)' }}>
-            Bridging the Gap<br />
-            <span className="italic text-gold">in Aerospace</span>
-          </h1>
+        {/* ── Radar pulse rings ── */}
+        <div className="radar-ring" />
+        <div className="radar-ring" />
+        <div className="radar-ring" />
 
-          <div className="hero-text-3 max-w-2xl mx-auto mt-8">
-            <p className="font-sans text-white/75 text-base lg:text-lg leading-relaxed font-light">
-              Supporting Women in Aviation and Space Industry.{' '}
-              <span className="text-white/90 font-medium">We respect men and women equally.</span>{' '}
-              Empowering the next generation of professionals.
-            </p>
-          </div>
+        {/* Static rings for depth */}
+        <div className="radar-static" style={{ width: 300, height: 300 }} />
+        <div className="radar-static" style={{ width: 500, height: 500 }} />
+        <div className="radar-static" style={{ width: 720, height: 720 }} />
+      </div>
 
-          <div className="hero-text-4 flex flex-col sm:flex-row gap-4 justify-center mt-12">
-            <a href="#support" className="btn-gold">Join Our Mission</a>
-            <a href="#about" className="btn-ghost">Our Mission</a>
-          </div>
-
-          {/* Award badge */}
-          <div className="hero-text-4 mt-10 inline-flex items-center gap-3 border border-gold/30 bg-gold/5 px-6 py-3 backdrop-blur-sm">
-            <Award size={16} className="text-gold flex-shrink-0" />
-            <span className="font-sans text-white/70 text-xs uppercase tracking-widest">
-              Finalist — Women Changing the World 2025 · Diversity & Inclusion
-            </span>
-          </div>
-        </div>
-
-        {/* Scene indicator — bottom centre */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-4">
-          {/* Scene label */}
-          <span
-            key={activeScene}
-            className="font-sans text-white/40 text-[10px] uppercase tracking-[0.3em]"
-            style={{ animation: 'fadeIn 0.5s ease' }}
-          >
-            {scenes[activeScene].label}
+      {/* Content */}
+      <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-10 text-center pt-24">
+        <div className="hero-text-1">
+          <span className="section-label text-gold tracking-[0.4em]">
+            ✦ Petra Air Foundation ✦
           </span>
-
-          {/* Dots */}
-          <div className="flex items-center gap-2">
-            {scenes.map((_, i) => (
-              <div
-                key={i}
-                className="rounded-full transition-all duration-500"
-                style={{
-                  width:  i === activeScene ? 20 : 6,
-                  height: 6,
-                  background: i === activeScene ? '#D4AF37' : 'rgba(255,255,255,0.25)',
-                }}
-              />
-            ))}
-          </div>
-
-          <ChevronDown size={16} className="text-gold/40 animate-bounce" />
         </div>
 
-        {/* Progress bar — left edge */}
-        <div className="absolute left-0 top-0 bottom-0 w-0.5 z-20 bg-white/5">
-          <div
-            className="w-full bg-gold transition-all duration-100"
-            style={{ height: `${progress * 100}%` }}
-          />
+        <h1 className="hero-text-2 font-serif font-black text-white mt-6 leading-[1.05]"
+          style={{ fontSize: 'clamp(2.8rem, 7vw, 6rem)' }}>
+          Bridging the Gap<br />
+          <span className="italic text-gold">in Aerospace</span>
+        </h1>
+
+        <div className="hero-text-3 max-w-2xl mx-auto mt-8">
+          <p className="font-sans text-white/75 text-base lg:text-lg leading-relaxed font-light">
+            Supporting Women in Aviation and Space Industry.{' '}
+            <span className="text-white/90 font-medium">We respect men and women equally.</span>{' '}
+            Empowering the next generation of professionals.
+          </p>
         </div>
 
+        <div className="hero-text-4 flex flex-col sm:flex-row gap-4 justify-center mt-12">
+          <a href="#support" className="btn-gold">
+            Join Our Mission
+          </a>
+          <a href="#about" className="btn-ghost">
+            Our Mission
+          </a>
+        </div>
+
+        {/* Award badge */}
+        <div className="hero-text-4 mt-16 inline-flex items-center gap-3 border border-gold/30 bg-gold/5 px-6 py-3 backdrop-blur-sm">
+          <Award size={16} className="text-gold flex-shrink-0" />
+          <span className="font-sans text-white/70 text-xs uppercase tracking-widest">
+            Finalist — Women Changing the World 2025 · Diversity & Inclusion
+          </span>
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-bounce">
+        <span className="text-white/30 font-sans text-[10px] uppercase tracking-widest">Scroll</span>
+        <ChevronDown size={16} className="text-gold/50" />
       </div>
     </section>
   )
