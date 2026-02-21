@@ -115,34 +115,16 @@ function Hero() {
 
         {/* Horizon line */}
         <div className="absolute bottom-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
-      </div>
 
-      {/* ── Animated plane – first pass ── */}
-      <div className="plane-wrapper">
-        <div className="plane-trail" />
-        <svg width="52" height="22" viewBox="0 0 52 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          {/* Fuselage */}
-          <path d="M2 11 Q10 9 28 10 L46 10.5 Q50 10.5 50 11 Q50 11.5 46 11.5 L28 12 Q10 13 2 11Z" fill="white" fillOpacity="0.85"/>
-          {/* Main wing */}
-          <path d="M18 10.5 L10 2 L14 2 L26 10.5 L14 19 L10 19 Z" fill="white" fillOpacity="0.7"/>
-          {/* Tail wing */}
-          <path d="M40 10.5 L36 5 L39 5 L44 10.5 L39 16 L36 16 Z" fill="white" fillOpacity="0.6"/>
-          {/* Engine pod */}
-          <ellipse cx="20" cy="13" rx="4" ry="1.8" fill="white" fillOpacity="0.5"/>
-          {/* Cockpit glint */}
-          <path d="M44 10 Q47 10.5 50 11 Q47 11 44 12Z" fill="#D4AF37" fillOpacity="0.8"/>
-        </svg>
-      </div>
+        {/* ── Radar pulse rings ── */}
+        <div className="radar-ring" />
+        <div className="radar-ring" />
+        <div className="radar-ring" />
 
-      {/* ── Animated plane – second pass (higher, slower) ── */}
-      <div className="plane-wrapper-2">
-        <div className="plane-trail" />
-        <svg width="38" height="16" viewBox="0 0 52 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M2 11 Q10 9 28 10 L46 10.5 Q50 10.5 50 11 Q50 11.5 46 11.5 L28 12 Q10 13 2 11Z" fill="white" fillOpacity="0.55"/>
-          <path d="M18 10.5 L10 2 L14 2 L26 10.5 L14 19 L10 19 Z" fill="white" fillOpacity="0.45"/>
-          <path d="M40 10.5 L36 5 L39 5 L44 10.5 L39 16 L36 16 Z" fill="white" fillOpacity="0.4"/>
-          <ellipse cx="20" cy="13" rx="4" ry="1.8" fill="white" fillOpacity="0.35"/>
-        </svg>
+        {/* Static rings for depth */}
+        <div className="radar-static" style={{ width: 300, height: 300 }} />
+        <div className="radar-static" style={{ width: 500, height: 500 }} />
+        <div className="radar-static" style={{ width: 720, height: 720 }} />
       </div>
 
       {/* Content */}
@@ -414,8 +396,8 @@ function Expedition() {
             <span className="section-label text-gold tracking-[0.4em] reveal">✦ Upcoming Expedition ✦</span>
             <h2 className="font-serif font-black text-white text-4xl lg:text-6xl leading-tight mt-4 reveal reveal-delay-1">
               Petra LN<br />
-              <span className="italic text-gold">Florida</span><br />
-              Expedition 2025
+              <span className="italic text-gold">Caribbean</span><br />
+              Expedition 2026
             </h2>
             <div className="gold-line mt-8 mb-8 reveal reveal-delay-2" />
             <p className="font-sans text-white/65 leading-relaxed reveal reveal-delay-2">
@@ -426,7 +408,7 @@ function Expedition() {
 
             <div className="grid grid-cols-3 gap-6 mt-10 reveal reveal-delay-3">
               {[
-                { label: 'Route', value: 'Florida → Caribbean → St. Maarten' },
+                { label: 'Route', value: 'Caribbean Islands → St. Maarten' },
                 { label: 'Partner', value: 'Flying Revue Media' },
                 { label: 'Purpose', value: '13 Principles in Action' },
               ].map(item => (
@@ -491,28 +473,27 @@ const YOUTUBE_CHANNEL   = 'https://www.youtube.com/@PetraONAIR'
 function Podcast() {
   const [playerReady, setPlayerReady] = useState(false)
 
-  // Episode cards — update titles/descriptions to match real episodes
   const episodes = [
     {
       id: '_gmgr7N4zZQ',
-      num: 'Najnovšia epizóda',
-      title: 'Pozri si najnovší diel @PetraONAIR',
+      num: 'Latest Episode',
+      title: 'Watch the Latest @PetraONAIR Episode',
       guest: 'Petra Sováková · PetraONAIR',
-      desc: 'Skutočný príbeh z neba — piloti, inžinieri a lídri leteckého priemyslu zdieľajú svoju cestu.',
+      desc: 'A real story from the sky — pilots, engineers, and aerospace leaders share their journey.',
     },
     {
       id: null,
-      num: 'EP · Čoskoro',
-      title: 'Ďalšia epizóda prichádza',
-      guest: 'Nový hosť · PetraONAIR',
-      desc: 'Prihlás sa na odber kanála, aby si nezmeškal novú epizódu. Na konci každého dielu pozývame hostí, aby sa podelili o svoju cestu.',
+      num: 'Coming Soon',
+      title: 'Next Episode on the Way',
+      guest: 'New Guest · PetraONAIR',
+      desc: 'Subscribe to the channel so you never miss a new episode. At the end of every conversation, our guests invite you to get involved.',
     },
     {
       id: null,
-      num: 'EP · Archív',
-      title: 'Všetky epizódy na YouTube',
+      num: 'Full Archive',
+      title: 'All Episodes on YouTube',
       guest: '@PetraONAIR · youtube.com',
-      desc: 'Celý archív rozhovorov s pilotmi a inžiniermi dostupný na kanáli @PetraONAIR.',
+      desc: 'The full archive of conversations with pilots and engineers is available on the @PetraONAIR channel.',
     },
   ]
 
@@ -555,21 +536,18 @@ function Podcast() {
         {/* ── Featured YouTube embed ── */}
         <div className="reveal mb-4">
           <div className="relative w-full bg-navy-dark" style={{ paddingBottom: '56.25%' }}>
-            {/* Thumbnail shown before user clicks — prevents autoplay / tracking */}
             {!playerReady && (
               <button
                 onClick={() => setPlayerReady(true)}
                 className="absolute inset-0 w-full h-full flex flex-col items-center justify-center group bg-navy-dark"
                 aria-label="Play featured episode"
               >
-                {/* YouTube thumbnail (maxresdefault falls back to hqdefault) */}
                 <img
                   src={`https://i.ytimg.com/vi/${FEATURED_VIDEO_ID}/hqdefault.jpg`}
                   alt="Featured episode thumbnail"
                   className="absolute inset-0 w-full h-full object-cover opacity-60"
                   loading="lazy"
                 />
-                {/* Play button overlay */}
                 <div className="relative z-10 flex flex-col items-center gap-4">
                   <div className="w-20 h-20 rounded-full bg-gold flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300">
                     <svg viewBox="0 0 24 24" className="w-9 h-9 fill-navy ml-1" aria-hidden="true">
@@ -577,10 +555,9 @@ function Podcast() {
                     </svg>
                   </div>
                   <div className="bg-navy/80 backdrop-blur-sm px-4 py-2 border border-white/20">
-                    <span className="font-sans text-white text-xs uppercase tracking-widest">Prehrať epizódu</span>
+                    <span className="font-sans text-white text-xs uppercase tracking-widest">Play Episode</span>
                   </div>
                 </div>
-                {/* Gold corner accent */}
                 <div className="absolute top-4 left-4 flex items-center gap-2">
                   <div className="w-2 h-2 bg-gold rounded-full animate-pulse" />
                   <span className="font-sans text-gold text-xs uppercase tracking-widest font-semibold">Live on YouTube</span>
@@ -588,7 +565,6 @@ function Podcast() {
               </button>
             )}
 
-            {/* Actual iframe — only mounted after click (privacy-friendly) */}
             {playerReady && (
               <iframe
                 className="absolute inset-0 w-full h-full"
@@ -605,7 +581,7 @@ function Podcast() {
             <div className="flex items-center gap-3">
               <div className="w-2 h-2 bg-gold rounded-full" />
               <span className="font-sans text-white/70 text-sm">
-                Najnovšia epizóda · <span className="text-white font-medium">@PetraONAIR</span>
+                Latest Episode · <span className="text-white font-medium">@PetraONAIR</span>
               </span>
             </div>
             <a
@@ -614,7 +590,7 @@ function Podcast() {
               rel="noopener noreferrer"
               className="font-sans text-gold text-xs uppercase tracking-widest hover:text-gold-light transition-colors flex items-center gap-2"
             >
-              Otvoriť na YouTube
+              Open on YouTube
               <ExternalLink size={12} />
             </a>
           </div>
@@ -630,7 +606,6 @@ function Podcast() {
               rel="noopener noreferrer"
               className={`card-hover group bg-gray-50 border border-gray-100 p-8 reveal reveal-delay-${i + 1} block`}
             >
-              {/* Thumbnail or placeholder */}
               {ep.id ? (
                 <div className="w-full aspect-video mb-6 overflow-hidden bg-navy relative">
                   <img
@@ -673,7 +648,7 @@ function Podcast() {
               <Youtube size={22} className="text-gold" />
             </div>
             <div>
-              <div className="font-serif font-bold text-white text-lg">Celý archív epizód</div>
+              <div className="font-serif font-bold text-white text-lg">Full Episode Archive</div>
               <div className="font-sans text-white/50 text-sm">youtube.com/@PetraONAIR</div>
             </div>
           </div>
@@ -684,7 +659,7 @@ function Podcast() {
             className="btn-gold flex-shrink-0 inline-flex items-center gap-2"
           >
             <Youtube size={16} />
-            Subscribnúť na kanál
+            Subscribe to the Channel
           </a>
         </div>
 
@@ -1220,7 +1195,7 @@ function Footer() {
           <div>
             <div className="font-sans font-semibold text-white text-xs uppercase tracking-widest mb-6">Programs</div>
             <div className="space-y-3">
-              {['Aerospace Family Community', 'Mindset Training', 'Glider Training', 'Florida Expedition', '@PetraONAIR Podcast'].map(p => (
+              {['Aerospace Family Community', 'Mindset Training', 'Glider Training', 'Caribbean Expedition', '@PetraONAIR Podcast'].map(p => (
                 <a key={p} href="#programs"
                   className="block font-sans text-white/40 text-sm hover:text-gold transition-colors">
                   {p}
