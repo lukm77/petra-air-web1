@@ -247,7 +247,7 @@ function Barriers() {
     {
       icon: Users,
       title: 'Lack of Role Models',
-      desc: 'You can't be what you can't see. We create the role models the industry is missing.',
+      desc: "You can't be what you can't see. We create the role models the industry is missing.",
     },
     {
       icon: Scale,
@@ -311,7 +311,7 @@ function Solution() {
       icon: Brain,
       label: 'The Mindset',
       title: 'Mindset Coaching',
-      desc: 'Specialized cognitive training and mindset coaching for success in high-stakes environments. Using Napoleon Hill's 13 Principles.',
+      desc: "Specialized cognitive training and mindset coaching for success in high-stakes environments. Using Napoleon Hill's 13 Principles.",
       cta: 'Apply for Coaching',
       href: '#programs',
     },

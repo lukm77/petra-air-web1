@@ -21,15 +21,15 @@
 
 @layer components {
   .btn-gold {
-    @apply bg-gold text-navy font-sans font-700 uppercase tracking-widest text-sm px-8 py-4 transition-all duration-300 hover:bg-gold-light hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+    @apply bg-gold text-navy font-sans font-bold uppercase tracking-widest text-sm px-8 py-4 transition-all duration-300 hover:bg-gold-light hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
   }
 
   .btn-ghost {
-    @apply border-2 border-white text-white font-sans font-600 uppercase tracking-widest text-sm px-8 py-4 transition-all duration-300 hover:bg-white hover:text-navy active:scale-95;
+    @apply border-2 border-white text-white font-sans font-semibold uppercase tracking-widest text-sm px-8 py-4 transition-all duration-300 hover:bg-white hover:text-navy active:scale-95;
   }
 
   .btn-ghost-gold {
-    @apply border-2 border-gold text-gold font-sans font-600 uppercase tracking-widest text-sm px-8 py-4 transition-all duration-300 hover:bg-gold hover:text-navy active:scale-95;
+    @apply border-2 border-gold text-gold font-sans font-semibold uppercase tracking-widest text-sm px-8 py-4 transition-all duration-300 hover:bg-gold hover:text-navy active:scale-95;
   }
 
   .section-label {
